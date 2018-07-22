@@ -1,0 +1,88 @@
+.root{
+    width:100px;
+    padding:5px 0 5px 0;
+    text-align: center;
+    background-color:orange;
+    overflow-wrap: break-word;
+}
+.individualFactory{
+    width:150px;
+    overflow-wrap: break-word;
+    margin:10px 0 0 50px;
+    text-align: center;
+}
+.factoryTitle{
+    background-color:lightblue;
+    cursor: pointer;
+}
+.factoryTitle:hover{
+    border:2px solid rgba(9,25,79,1)
+}
+.randomNums{
+    width:100px;
+    margin-left:50px;
+    text-align: center;
+    list-style: none;
+}
+.createFactoryBtn{
+    width:200px;
+    padding:5px;
+    background-color:lemonchiffon;
+    text-align: center;
+    margin-bottom:10px;
+    cursor: pointer;
+    border:2px solid rgba(245,224,163,1);
+}
+.createFactoryBtn:active{
+    border:none;  
+}
+
+
+/* modal styling */
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background-color:rgba(163,158,158,.6);
+    display:none;
+}
+.modalContent{
+    background-color:rgba(230,230,230,1);
+   padding:10px;
+   width:30%;
+  margin:10% 0 0 35%;
+  text-align: center;
+}
+#X{
+    float:right;
+    margin:1px;
+    padding:2px;
+}
+#X:hover{
+    cursor: pointer;
+    border:1px solid black;
+
+}
+form input,select{
+  margin:5px 0 15px 0;
+}
+#editFactoryBtn{
+     width:40%; 
+    padding:5px;
+    background-color:rgba(155,215,213,1);
+    text-align: center;
+     margin:0 0 10px 1%; 
+    cursor: pointer;
+    /* border:2px solid rgba(54,140,191,1); */
+}
+#deleteBtn{
+    width:40%;
+    padding:5px;
+    background-color:rgba(209,64,53,1);
+    text-align: center;
+    margin:0 0 10px 30%;
+    cursor: pointer;
+    /* border:2px solid rgba(245,224,163,1); */
+}
