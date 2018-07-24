@@ -19,8 +19,8 @@ changes across all browsers.
 - socket.io
 
 ## Installation:
-npm install dependencies
-node server
+- npm install dependencies
+- node server
 
 ## Author
 Michael Emmons
