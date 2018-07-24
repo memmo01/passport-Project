@@ -6,7 +6,7 @@ let bodyParser=require('body-parser');
 let db= require("./models");
 
 
-let PORT = process.env.NODE_ENV||3000;
+let PORT = process.env.PORT||3000;
 
 
 
