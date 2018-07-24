@@ -103,11 +103,11 @@
 
             if(type === "addData"){
                 form = addDataForm(item)
-                $(".modalBody").html(form)
+                $(".modalForm").html(form)
             }
             else if(type ==="newData"){
                 form= newDataForm(options)
-                $(".modalBody").html(form)
+                $(".modalForm").html(form)
             }            
 
                 
@@ -124,7 +124,8 @@
                 form+=`<input type='number' required='required' name='max' value=${item.max}><br>`;
                 form+=`<input type="submit" id='editFactoryBtn'required='required' name="submitchanges"/><br/>`
                 form+=`</form>`
-                form+=`<button id='deleteBtn' onClick='handleDelete()'>Delete Factory</button>`
+                form+=`<button id='deleteBtn' onClick='handleDelete()'>Delete </button><br>`
+                form+=`<button id='cancelBtn' onClick='closeModal()'>Cancel</button>`
 
                 return  form;
 
@@ -141,6 +142,7 @@
                 form+=`<input type='number' required='required' name='max' placeholder='max'><br>`;
                 form+=`<input type="submit" required='required' id='submitChanges' name="submitchanges"/><br/>`
                 form+=`</form>`
+                form+=`<button id='cancelBtn' onClick='closeModal()'>Cancel</button>`
 
                 return  form;
 
@@ -290,6 +292,7 @@
         }
 
         closeModal=()=>{
+            event.preventDefault()
             $(".modal").css("display","none")
 
         }
