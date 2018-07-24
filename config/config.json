@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "wfthxyg4dvw8zm8z",
-    "password": "wfvu5bdmqi9lfrg7",
-    "database": "p2hs5npaowixonih",
-    "host": "x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "username": "root",
+    "password": "PBJtime",
+    "database": "tree_db",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
