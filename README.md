@@ -1,6 +1,6 @@
 # passport-Project
 
-##About
+## About
 
 A project created that allows a user to create a live updating tree view. The user can add factories which contain anywhere from 1-15 nodes beneath it, each 
 containing a random number. An unlimited amount of factories can be created. Each factory's name, minimum number, and maximum number can be alterned by clicking on the 
@@ -8,7 +8,7 @@ specific factory name. Also a delete option is available when selecting the spec
 changes across all browsers.
 
 
-##Technologies used:
+## Technologies used:
 - HTML
 - CSS
 - JavaScript
@@ -18,5 +18,9 @@ changes across all browsers.
 - Express
 - socket.io
 
-##Author
+## Installation:
+npm install dependencies
+node server
+
+## Author
 Michael Emmons
