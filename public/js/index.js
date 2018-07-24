@@ -4,11 +4,11 @@
     
     let dataResults;
     let selectedObj;
-
+    let socket = io()
     
 
     let load =()=>{
-         let socket = io()
+         
         //on load get all data in database
                 socket.emit('requestData');        
                 
@@ -253,13 +253,14 @@
         }
         
         addToDatabase=(formData)=>{
-            $.post("/api/postdata",formData,()=>{
-                console.log("loaded into database...")
-            }).then(function(){
-                load()
-            })
-            
-            
+
+                socket.emit('postData',formData)
+
+                socket.on('postResponse',()=>{
+                     load()
+                })
+                
+           
         }
 
         handleDelete=()=>{
@@ -267,26 +268,23 @@
             $(".modal").css("display","none")
             
                 deleteItem=selectedObj.id
-                $.ajax({
-                    url:`/api/deletedata/${deleteItem}`,
-                    method:"DELETE"
-                }).done(()=>{})
-                .then(()=>{load()})
+
+                socket.emit("deleteData",deleteItem);
+
+                socket.on('confirmDelete',()=>{
+                    load()
+                })
         }
 
 
 
         updateDatabase=(formData)=>{
-            console.log(formData)
-             $.ajax({
-                        url:"/api/dataupdate",
-                        method:"PUT",
-                        data:formData
-                      }).done(()=>{
-                          console.log("howdy")
-                      }).then(()=>{
-                          load()
-                      })
+
+            socket.emit('dataUpdate',formData);
+                socket.on('dataUpdateResponse',()=>{
+                    load();
+                })
+            
 
 
         }
@@ -297,17 +295,4 @@
         }
 
        
-
-
-
-
-
-
-
-
-
-
-
-
-
         })
