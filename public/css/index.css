@@ -86,3 +86,14 @@ form input,select{
     cursor: pointer;
     /* border:2px solid rgba(245,224,163,1); */
 }
+.numRangeText{
+    position: absolute;
+    margin-left:210px;
+    overflow-wrap: break-word;
+    background-color:gray;
+    color:white;
+    padding:5px;
+    font-size: 12px;
+    border-radius:20%;
+    text-align: center;
+}

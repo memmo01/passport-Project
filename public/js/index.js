@@ -8,13 +8,23 @@
     
 
     let load =()=>{
+         let socket = io()
         //on load get all data in database
-          $.get("./api/getAllData",(results)=>{
-              console.log(results)
-              dataResults=(results)
-            sortData(results)
-          })
+                socket.emit('requestData');        
+                
+                socket.on("sendBackData",function(res){
+                    console.log("recieving")
+                    console.log(res)
+             
+                 dataResults=(res)
+                 sortData(res)
+                
+                })
     }
+        
+         
+         
+    
     load()
 
         //this function sorts data and converts it into individual factories with corresponding nodes listed below
@@ -34,6 +44,11 @@
                         titleText.text(results.title)
                     
                         $(title).append(titleText)
+
+                        let rangeText = $("<div>")
+                        rangeText.text(`${results.min} : ${results.max}`)
+                        rangeText.addClass('numRangeText')
+                        $(title).append(rangeText)
 
                         
                     numArray.map(numberSort=>{
@@ -164,27 +179,22 @@
 
             let currentArray=JSON.parse(formData.numArray)
             
-            let highestNumInArray=Math.max(...currentArray);
-            let lowestNumInArray=Math.min(...currentArray)
-           
-            if((parseInt(highestNumInArray)>max) ||(parseInt(lowestNumInArray)<min)){
+        if(min ==selectedObj.min){
+           updateDatabase(formData)
 
-                let newArray=currentArray.map(num=>{
-                    if((num > max) || (num< min)){
-                        return randomNumGenerater(max,min)
-                    }
-                    else{
-                        return num;
-                    }
+        }  
+         else{      
+                   let newArray=currentArray.map(num=>{
+                    
+                    return randomNumGenerater(max,min)                 
+                   
                 })
 
                 formData.numArray = JSON.stringify(newArray);
                 updateDatabase(formData)
-            }
-            else{
-                updateDatabase(formData)
-            }
-
+            
+          
+        }
         }
 
 
@@ -204,7 +214,7 @@
                 let min = form['min'].value;
                 let nodes = form['nodeValue'].value;
 
-                if(max < min){
+                if(parseInt(max) < parseInt(min)){
                     alert("you need to make changed to your range")
                 }
                 else{
@@ -246,7 +256,7 @@
             $.post("/api/postdata",formData,()=>{
                 console.log("loaded into database...")
             }).then(function(){
-load()
+                load()
             })
             
             
@@ -267,6 +277,7 @@ load()
 
 
         updateDatabase=(formData)=>{
+            console.log(formData)
              $.ajax({
                         url:"/api/dataupdate",
                         method:"PUT",
