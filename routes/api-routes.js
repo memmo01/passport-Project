@@ -3,7 +3,7 @@ let Sequelize = require("sequelize");
 
 module.exports=(app,io)=>{
 
-  
+    //returns all data in database
 
     io.on('connection', function(socket){
              
@@ -21,6 +21,7 @@ module.exports=(app,io)=>{
         });
 
     
+  
 
 
         socket.on("deleteData",(req,res)=>{

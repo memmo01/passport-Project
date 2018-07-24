@@ -7,14 +7,13 @@
     let socket = io()
     
 
+
     let load =()=>{
          
         //on load get all data in database
                 socket.emit('requestData');        
                 
-                socket.on("sendBackData",function(res){
-                    console.log("recieving")
-                    console.log(res)
+                socket.on("sendBackData",(res)=>{
              
                  dataResults=(res)
                  sortData(res)
@@ -63,7 +62,7 @@
                     return title
                     
                 })
-                    console.log(info)
+                    
 
                 $(".factoryData").html(info)
                
@@ -96,16 +95,17 @@
         }
 
 
-        createForm=(item,e)=>{
+        createForm=(item,type)=>{
             $(".modal").css("display","block")
             let quantity =[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
             let options = quantity.map(numOption=>{ return `<option key=${numOption} value=${numOption}>${numOption}</option>`} )
             let form;
 
-            if(e === "addData"){
+            if(type === "addData"){
                 form = addDataForm(item)
                 $(".modalBody").html(form)
-            }else if(e==="newData"){
+            }
+            else if(type ==="newData"){
                 form= newDataForm(options)
                 $(".modalBody").html(form)
             }            
@@ -118,13 +118,13 @@
            
             let form=`<form id='form'onSubmit='handleUpdateFormSubmit(this)'>`;
                 form+=`<label>Edit Title</label><br>`;
-                form+=`<input type='text' name='title' required='required' value=${item.title}><br>`;
+                form+=`<input type='text' name='title' required='required' pattern='^[a-zA-Z0-9 ]*$' value=${item.title}><br>`;
                 form+=`<label>Enter Range Low to High</label><br>`;
                 form+=`<input type='number' required='required' name='min' value=${item.min}>`;
                 form+=`<input type='number' required='required' name='max' value=${item.max}><br>`;
                 form+=`<input type="submit" id='editFactoryBtn'required='required' name="submitchanges"/><br/>`
                 form+=`</form>`
-                form+=`<div id='deleteBtn' onClick='handleDelete()'>Delete Factory</div>`
+                form+=`<button id='deleteBtn' onClick='handleDelete()'>Delete Factory</button>`
 
                 return  form;
 
@@ -133,13 +133,13 @@
 
                 let form=`<form id='form'onSubmit='handleNewFormSubmit(this)'>`;
                 form+=`<label>Add Title</label><br>`;
-                form+=`<input type='text' name='title' required='required' placeholder='Enter Title'><br>`;
+                form+=`<input type='text' name='title' required='required' pattern='^[a-zA-Z0-9 ]*$' placeholder='Enter Title'><br>`;
                 form+=`<label> How Many Nodes?</label><br>`;
                 form+=`<select name='nodeValue'>${options}</select><br>`;
                 form+=`<label>Enter Range</label><br>`;
                 form+=`<input type='number' required='required' name='min' placeholder='min'>`;
                 form+=`<input type='number' required='required' name='max' placeholder='max'><br>`;
-                form+=`<input type="submit" required='required' name="submitchanges"/><br/>`
+                form+=`<input type="submit" required='required' id='submitChanges' name="submitchanges"/><br/>`
                 form+=`</form>`
 
                 return  form;
@@ -156,7 +156,6 @@
                         min:(form['min'].value),
                         max:(form['max'].value),
                         numArray:selectedObj.numArray
-                    // (form['nodeValue'].value) not needed because it is only an update
                     }
 
                  if(parseInt(formData.max) < parseInt(formData.min)){
@@ -213,6 +212,7 @@
                 let max = form['max'].value;
                 let min = form['min'].value;
                 let nodes = form['nodeValue'].value;
+                let title= form['title'].value;
 
                 if(parseInt(max) < parseInt(min)){
                     alert("you need to make changed to your range")
@@ -220,7 +220,7 @@
                 else{
 
                     let formData={
-                        title:(form['title'].value),
+                        title:title,
                         min:min,
                         max:max,
                         numArray:nodes
@@ -251,7 +251,7 @@
 
 
         }
-        
+
         addToDatabase=(formData)=>{
 
                 socket.emit('postData',formData)
