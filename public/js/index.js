@@ -23,7 +23,7 @@
         
          
          
-    
+    //start program
     load()
 
         //this function sorts data and converts it into individual factories with corresponding nodes listed below
@@ -89,7 +89,7 @@
             //3. then prepopulate a form containing current info they can see and
                 //change if they want to
                 createForm(item,"addData")
-            // console.log(data[0])
+       
 
             
         }
@@ -100,7 +100,7 @@
             let quantity =[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
             let options = quantity.map(numOption=>{ return `<option key=${numOption} value=${numOption}>${numOption}</option>`} )
             let form;
-
+//sort if editing data or creating new data
             if(type === "addData"){
                 form = addDataForm(item)
                 $(".modalForm").html(form)
@@ -113,7 +113,7 @@
                 
 
         }
-
+//edit form
         addDataForm=(item)=>{
            
             let form=`<form id='form'onSubmit='handleUpdateFormSubmit(this)'>`;
@@ -130,6 +130,7 @@
                 return  form;
 
         }
+            //new form
             newDataForm=(options)=>{
 
                 let form=`<form id='form'onSubmit='handleNewFormSubmit(this)'>`;
@@ -148,7 +149,7 @@
 
             }
 
-        //this takes the data and sends it to the database for new entry or to be updated
+        //this takes the data and sends it to the database to be updated
         handleUpdateFormSubmit=(form)=>{
                 event.preventDefault()
                  
@@ -180,7 +181,7 @@
 
             let currentArray=JSON.parse(formData.numArray)
             
-        if(min ==selectedObj.min){
+        if(min == selectedObj.min){
            updateDatabase(formData)
 
         }  
